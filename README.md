@@ -8,45 +8,50 @@ Tests are organized as one test per subdirectory.  Adding a new test involves on
 test inputs and golden results.
 
 An example is provided with a simple program (testapp.py) that counts words and characters in text files, and two tests for
-the program.  To run the example, simply run 'end-to-end.py'
+the program.  
+
+To run the example, simply run 'end-to-end.py'
 
 
-Requirements:
-	Python 2.7
+##Requirements:
+Python 2.7
 
-Running tests:
-	end-to-end.py  [tests]
+##Running tests:
+end-to-end.py  [tests]
 	
-Example:
-	end-to-end         - will run all tests in the end-to-end directory
-	end-to-end t1 t2   - will run tests t1, t2, t3
+##Example:
+	end-to-end.py          - will run all tests in the end-to-end directory
+	end-to-end.py  t1 t2   - will run tests t1, t2, t3
 	
 
-Test Setup:
-	Each test contains 3 directories and an optional readme.txt file
+##Test Setup:
+Each test contains 3 directories and an optional readme.txt file
+
 	input\     - Test inputs
 	scripts\   - Test scripts
 	golden\    - Golden test results
 	readme.txt - Test purpose
+
+A readme.txt in each test may be provided to document the test purpose. If provided, it is printed during the test run.
+
+In addition, the common\ directory contains input and script files that are common to all tests.  These common files may be overridded by files in input\ and scripts\ directories.
+
+The temp\ directory is used for running each test
+
+Each test must have a script named 'runtest.py' to run the test.  This is the only requirement.
 	
-	A readme.txt in each test may be provided to document the test purpose. If provided, it is printed during the test run.
-	
-	In addition, the common\ directory contains input and script files that are common to all tests.  These common files may be overridded by files in input\ and scripts\ directories.
-	
-	The temp\ directory is used for running each test
-	
-	Each test must have a script named 'runtest.py' to run the test.  This is the only requirement.
-	
-Testing Process:
-	When a test is run, the following occurs
+##Testing Process:
+When a test is run, the following occurs
+
 	1) The temp\ directory is cleared out
 	2) The contents of common\, input\ and scripts\ are copied to temp\, in that order
 	3) The script 'runtest.py' is executed in the temp\ directory, performing the test
 	4) Each file in golden\ is compared with the same named file in temp\, differences are failures
 	
-Expected Output:
-	Output is to stdout.  Each test prints PASSED or FAILED.  If failed, the difference is printed.
-	Example:
+##Example:
+Output of end-to-end is to stdout.  Each test prints PASSED or FAILED.  If failed, the difference is printed.
+A summary of failed tests is printed at the end.
+
 	
 		**************************
 		*  Executing: test1
@@ -69,3 +74,5 @@ Expected Output:
 		*  Comparing: runtest.log
 		*  FAILED: test2
 		**************************
+
+		*** TEST FAILURES: test2 ****
