@@ -52,18 +52,19 @@ def main():
 
     failures = []
 
-    if len(sys.argv) > 1:
+    if '-harness' in sys.argv:
+        harness = True
+        print '**************************'
+        print '*  Harnesessing Goldens  *'
+        print '**************************'
+    
+    if len(sys.argv) > (2 if harness else 1):
         # Run those tests given in the arguments
         testdirs = sys.argv[1:]
     else:
         # Run all the tests in the end-to-end dir
         testdirs = [d for d in os.listdir(endtoenddir) if os.path.isdir(os.path.join(endtoenddir, d))]
 
-    if '-harness' in testdirs:
-        harness = True
-        print '**************************'
-        print '*  Harnesessing Goldens  *'
-        print '**************************'
             
     for test in testdirs:
         if test == '-harness':
